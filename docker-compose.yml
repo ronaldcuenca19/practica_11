@@ -1,0 +1,22 @@
+services:
+  web:
+    build: . 
+    ports:
+      - "8000:8000"  
+    depends_on:
+      - db  
+    environment:
+      - DEBUG=1  
+      - DB_HOST=db  
+      - DB_USER=root
+      - DB_PASSWORD=root
+      - DB_NAME=default  
+  db:
+    image: mariadb:10.5.9 
+    environment:
+      - MYSQL_ROOT_PASSWORD=root 
+    volumes:
+      - db_data:/var/lib/mysql  
+
+volumes:
+  db_data:
